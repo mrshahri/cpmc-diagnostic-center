@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.ws.rs.core.Response;
+
 /**
  * Created by Rakib on 5/25/2017.
  */
@@ -23,8 +25,14 @@ public class NetworkDiagnosisController {
     private final static org.slf4j.Logger logger = LoggerFactory.getLogger(NetworkDiagnosisController.class);
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    @ResponseBody public String welcome() {
+    @ResponseBody public String getDiagnosisCheck() {
         return networkDiagnosisService.getMachineDiagnostics();
+    }
+
+    @RequestMapping(value = "/clear", method = RequestMethod.GET)
+    public Response clearDiagnosisBuffer() {
+        networkDiagnosisService.cleanQueue();
+        return Response.ok().build();
     }
 
     private NetworkDiagnosisService getNetworkDiagnosisService() {

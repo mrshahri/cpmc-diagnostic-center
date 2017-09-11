@@ -21,7 +21,7 @@ import java.util.TimerTask;
 @Service
 public class NetworkDiagnosisService {
 
-    private static final int MAX_SIZE = 1000;
+    private static final int MAX_SIZE = 10;
 
     private Queue<MachineConnectivityStatus> queue;
 
@@ -92,7 +92,7 @@ public class NetworkDiagnosisService {
                 ++warningConditionCount;
             }
         }
-        return warningConditionCount > 10;
+        return warningConditionCount >= 1;
     }
 
     private boolean isError() {
@@ -102,7 +102,7 @@ public class NetworkDiagnosisService {
                 ++errorConditionCount;
             }
         }
-        return errorConditionCount > 10;
+        return errorConditionCount >= 1;
     }
 
     public String getMachineDiagnostics() {
@@ -115,5 +115,9 @@ public class NetworkDiagnosisService {
                 return "OK";
             }
         }
+    }
+
+    public void cleanQueue() {
+        this.getQueue().clear();
     }
 }
