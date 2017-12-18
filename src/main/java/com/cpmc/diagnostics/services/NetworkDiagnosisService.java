@@ -9,7 +9,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.stereotype.Service;
 
-import java.io.IOError;
 import java.io.IOException;
 import java.util.Queue;
 import java.util.Timer;
@@ -27,7 +26,7 @@ public class NetworkDiagnosisService {
 
     public NetworkDiagnosisService() {
         this.queue = EvictingQueue.create(MAX_SIZE);
-        enqueue();
+//        enqueue();
     }
 
     public Queue<MachineConnectivityStatus> getQueue() {
@@ -45,7 +44,7 @@ public class NetworkDiagnosisService {
                     MachineConnectivityStatus status = new MachineConnectivityStatus();
 
                     HttpClient client = HttpClientBuilder.create().build();
-                    HttpGet httpGet = new HttpGet("http://10.5.55.7:10090/current");
+                    HttpGet httpGet = new HttpGet("http://uaf132943.ddns.uark.edu:10090/current");
                     HttpResponse httpResponse = client.execute(httpGet);
                     Builder parser = new Builder();
                     Document document = parser.build(httpResponse.getEntity().getContent());

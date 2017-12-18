@@ -11,7 +11,7 @@
         </layout>
     </appender>
 
-    <logger name="com.cpmc.ultimaker" level="debug"
+    <logger name="com.cpmc.diagnostics" level="debug"
             additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
